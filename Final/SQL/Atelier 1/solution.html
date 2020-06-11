@@ -208,7 +208,7 @@ primary <span class="hljs-keyword">key</span>(Code),
 <pre><code class="language-sql"><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">Name</span>, Price <span class="hljs-keyword">FROM</span> products <span class="hljs-keyword">WHERE</span> Price = (<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">min</span>(Price) <span class="hljs-keyword">FROM</span> products);
 </div></code></pre>
 <h2 id="q20-s%c3%a9lectionnez-le-nom-de-chaque-fabricant-ainsi-que-le-nom-et-le-prix-de-son-produit-le-plus-cher">(Q20) Sélectionnez le nom de chaque fabricant ainsi que le nom et le prix de son produit le plus cher.</h2>
-<pre><code class="language-sql"><div><span class="hljs-comment">-- SELECT M.name, P.Name, P.Price FROM products P join manufacturers M on P.Manufacturer_code = M.Code group by Manufacturer_code ;</span>
+<pre><code class="language-sql"><div><span class="hljs-comment">SELECT products.Name, products.Price, manufacturers.Name FROM Products, Manufacturers WHERE products.Manufacturer_code = manufacturers.Code AND products.Price = ( SELECT MAX(products.Price) FROM Products WHERE products.Manufacturer_code = manufacturers.Code )</span>
 </div></code></pre>
 <h2 id="q21-ajouter-un-nouveau-produit--loudspeakers-70--manufacter-2">(Q21) Ajouter un nouveau produit : Loudspeakers, 70 $, manufacter 2</h2>
 <pre><code class="language-sql"><div><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> products (<span class="hljs-keyword">Name</span>, Price, Manufacturer_code) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'Loudspeakers'</span>, <span class="hljs-number">70.00</span>, <span class="hljs-number">2</span>);

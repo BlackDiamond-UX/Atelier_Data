@@ -125,7 +125,7 @@ SELECT Name, Price FROM products WHERE Price = (SELECT min(Price) FROM products)
 ```
 ## (Q20) Sélectionnez le nom de chaque fabricant ainsi que le nom et le prix de son produit le plus cher.
 ```sql
--- SELECT M.name, P.Name, P.Price FROM products P join manufacturers M on P.Manufacturer_code = M.Code group by Manufacturer_code ;
+SELECT products.Name, products.Price, manufacturers.Name FROM Products, Manufacturers WHERE products.Manufacturer_code = manufacturers.Code AND products.Price = ( SELECT MAX(products.Price) FROM Products WHERE products.Manufacturer_code = manufacturers.Code )
 ```
 ## (Q21) Ajouter un nouveau produit : Loudspeakers, 70 $, manufacter 2 
 ```sql
